@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="LOGOUT">
+</form>
+<a th:href="@{/admin}">Go to list User</a>
+<div class= >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form th:method="post" th:action="@{/create}" th:object="${user}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="number" class="form-control" name="name" id="id" th:field="${user.id}" th:value ="${user.id}" hidden>
+                    <input type="text" class="form-control" name="name" th:field="${user.username}" th:value="${user.username}" hidden>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">User Name</label>
+                        <input type="text" class="form-control" name="name" id="username" th:value="${user.username}" disabled>
+                    </div>
+
+                    <input type="password" class="form-control" name="name"th:field="${user.password}" th:value="${user.password}" hidden>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label"> Name</label>
+                        <input type="text" class="form-control" name="name" id="name" th:field="${user.name}" th:value="${user.name}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Phone</label>
+                        <input type="number" class="form-control" name="price" id="price" th:field="${user.phone}" th:value="${user.phone}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="price" id="address" th:field="${user.address}" th:value="${user.address}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" name="price" id="email" th:field="${user.email}" th:value="${user.email}">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Role</label>
+                        <select th:field="${user.roleId}" class="form-control" th:selected="${user.roleId}">
+                            <option th:value="'1'" th:text="ADMIN"></option>
+                            <option th:value="'2'" th:text="USER"></option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,67 +1,58 @@
 package com.example.asm_sem4.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "user", schema = "asm_s4", catalog = "")
+@Table(name = "user")
+@ToString
 public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
-    @Basic
+    public  int id;
     @Column(name = "username")
-    private String username;
-    @Basic
+    public  String username;
+    @NotNull(message = "password not null")
     @Column(name = "passworld")
-    private int passworld;
-    @Basic
+    public  String password;
+
     @Column(name = "role_id")
-    private int roleId;
+    public  int roleId;
+    @NotNull(message = "name not null")
+    @Column(name = "name")
+    public  String name;
+    @NotNull(message = "email not null")
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "email")
+    public  String email;
+    @NotNull(message = "address not null")
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "address")
+    public  String address;
+    @NotNull(message = "phone not null")
 
-    public String getUsername() {
-        return username;
-    }
+    @Column(name = "phone")
+    public  int phone;
+    public UserEntity(){}
 
-    public void setUsername(String username) {
+    public UserEntity(String username, String password,int roleId){
         this.username = username;
-    }
-
-    public int getPassworld() {
-        return passworld;
-    }
-
-    public void setPassworld(int passworld) {
-        this.passworld = passworld;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
+        this.password = password;
         this.roleId = roleId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return id == that.id && passworld == that.passworld && roleId == that.roleId && Objects.equals(username, that.username);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, passworld, roleId);
-    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
+    public RoleEntity roleEntity;
 }

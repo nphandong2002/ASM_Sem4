@@ -1,47 +1,34 @@
 package com.example.asm_sem4.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "role", schema = "asm_s4", catalog = "")
+@Table(name = "role")
+@Getter
+@Setter
+
 public class RoleEntity {
-    @Basic
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "id")
     private int id;
-    @Basic
+
     @Column(name = "name")
     private String name;
 
-    public int getId() {
-        return id;
-    }
+    public RoleEntity(){}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public RoleEntity(String name){
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RoleEntity that = (RoleEntity) o;
-        return id == that.id && Objects.equals(name, that.name);
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "roleEntity")
+    private List<UserEntity> user;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }

@@ -2,7 +2,12 @@ package com.example.asm_sem4.Mapper;
 
 import com.example.asm_sem4.Dto.userDto;
 import com.example.asm_sem4.Entity.UserEntity;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMappercustom {
     public  UserEntity convertToDto2(userDto userDto) {
         if ( userDto == null ) {
@@ -32,7 +37,9 @@ public class UserMappercustom {
         if ( userDto.getPhone() != null ) {
             userEntity.setPhone( Integer.parseInt( userDto.getPhone() ) );
         }
-
+        if ( userDto.getRoleId() != null ) {
+            userEntity.setRoleId( Integer.parseInt( userDto.getRoleId() ) );
+        }
         return userEntity;
     }
 
@@ -49,6 +56,8 @@ public class UserMappercustom {
             userDto.setName( userEntity.getName() );
         }
         userDto.setPhone( String.valueOf( userEntity.getPhone() ) );
+
+        userDto.setRoleId(String.valueOf( userEntity.getRoleId()));
         if ( userEntity.getEmail() != null ) {
             userDto.setEmail( userEntity.getEmail() );
         }
